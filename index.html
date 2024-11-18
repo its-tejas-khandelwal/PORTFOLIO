@@ -183,20 +183,36 @@
         </div>
 
         <div id="contact">
-            <center><h5 class="section-header">CONTACT US</h5></center>
-            <div class="contact-form">
-                <h2>Contact Us</h2>
-                <form id="myForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe-CAzUqj1UWB4cUeiatkJueTi10xTSJAGXxRv09f5O8n01Gg/formResponse" method="POST">
-                    <input type="text" name="entry.1299876013" placeholder="Your Name" required>
-                    <input type="email" name="entry.822572349" placeholder="Your Email" required>
-                    <textarea name="entry.860908998" placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-                <div class="thank-you-message" id="thankYouMessage">
-                    Thank you for your response! I will contact you shortly.
-                </div>
-            </div>
-            <p>If you have any questions or would like to get in touch, feel free to reach out via email at <a href="mailto:221909@kit.ac.in">221909@kit.ac.in</a>.</p>
+    <center><h5 class="section-header">CONTACT US</h5></center>
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="myForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="thank-you-message" id="thankYouMessage">
+            Thank you for your response! I will contact you shortly.
+        </div>
+    </div>
+    <p>If you have any questions or would like to get in touch, feel free to reach out via email at <a href="mailto:221909@kit.ac.in">221909@kit.ac.in</a>.</p>
+</div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Show the thank you message
+        document.getElementById('thankYouMessage').style.display = 'block';
+
+        // Optionally hide the form after submission
+        this.style.display = 'none';
+
+        // Here you can add code to send the form data using AJAX if needed
+    });
+</script>
+            
         </div>
     </div>
 
