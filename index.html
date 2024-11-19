@@ -63,8 +63,11 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%; /* Full width */
-            margin: 0; /* Remove margin */
+            width: 100%; /* Full width on smaller screens */
+            display: flex; /* Use flexbox for form elements */
+            flex-direction: column; /* Stack elements vertically */
+            align-items: stretch; /* Stretch elements to full width */
+            margin: 0 auto; /* Center the form horizontally */
         }
         .contact-form input, .contact-form textarea {
             width: 100%; /* Full width */
@@ -105,13 +108,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#about">Home</a>
+                        <a class="nav-link active" aria-current=" page" href="#about">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#projects">Projects</a>
                     </li>
                     <li class="nav-item">
- <a class="nav-link" href="#certificates">Certificates</a>
+                        <a class="nav-link" href="#certificates">Certificates</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Us</a>
@@ -152,9 +155,10 @@
             <center><h5 class="section-header">CERTIFICATES</h5></center>
             <div class="card-group">
                 <div class="card">
-                    <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" class="card-img-top" alt="IBM Certificate: Getting Started with Enterprise Data Science">
+                    <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" class="card-img-top" alt="IBM Certificate: Getting Started with Enterprise Data Science">
                     <div class="card-body">
                         <h5 class="card-title">IBM Certificate: Getting Started with Enterprise Data Science</h5>
+                        <p class ```html
                         <p class="card-text">I completed the "Getting Started with Enterprise Data Science" course by IBM, which provided a foundational understanding of data science principles and their application in enterprise environments. The course covered key topics including data analysis, machine learning, and data-driven decision-making, focusing on practical tools and techniques used in the industry. It also explored various real-world use cases of data science in business, highlighting how data can be leveraged to drive innovation and improve organizational performance.</p>
                     </div>
                 </div>
@@ -162,7 +166,7 @@
                     <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/hackathon%20Certificate%20.jpg?raw=true" class="card-img-top" alt="Aviothic 1.0 Hackathon Certificate">
                     <div class="card-body">
                         <h5 class="card-title">Aviothic 1.0 Hackathon Certificate – Kanpur Institute of Technology</h5>
-                        <p class="card-text">I participated in the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, where my team secured 4th place for our innovative project. We developed a prototype for an NGO website designed to support the social initiative Aikyam, which focuses on providing a safe and nurturing environment for children and elderly individuals.</p>
+                        <p class="card-text">I participated in the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, where my team secured 4th place for our innovative project. We developed a prototype for an NGO website designed to support the social initiative Aikyam, which focuses on providing a safe and nurturing environment for children and elderly individuals.The hackathon experience was immensely rewarding as it allowed us to address real-world problems through innovative technological solutions while working collaboratively under tight deadlines.</p>
                     </div>
                 </div>
                 <div class="card">
@@ -183,44 +187,52 @@
         </div>
 
         <div id="contact">
-    <center><h5 class="section-header">CONTACT US</h5></center>
-    <div class="contact-form">
-        <h2>Contact Us</h2>
-        <form id="myForm">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="thank-you-message" id="thankYouMessage">
-            Thank you for your response! I will contact you shortly.
-        </div>
-    </div>
-    <p>If you have any questions or would like to get in touch, feel free to reach out via email at <a href="mailto:221909@kit.ac.in">221909@kit.ac.in</a>.</p>
-</div>
-
-<script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting
-
-        // Show the thank you message
-        document.getElementById('thankYouMessage').style.display = 'block';
-
-        // Optionally hide the form after submission
-        this.style.display = 'none';
-
-        // Here you can add code to send the form data using AJAX if needed
-    });
-</script>
-            
+            <center><h5 class="section-header">CONTACT US</h5></center>
+            <div class="contact-form">
+                <h2>Contact Us</h2>
+                <form id="myForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe-CAzUqj1UWB4cUeiatkJueTi10xTSJAGXxRv09f5O8n01Gg/formResponse" method="POST">
+                    <input type="text" name="entry.1299876013" placeholder="Your Name" required>
+                    <input type="email" name="entry.822572349" placeholder="Your Email" required>
+                    <textarea name="entry.860908998" placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div class="thank-you-message" id="thankYouMessage">
+                    Thank you for your response! I will contact you shortly.
+                </div>
+            </div>
+            <p>If you have any questions or would like to get in touch, feel free to reach out via email at <a href="mailto:221909@kit.ac.in">221909@kit.ac.in</a>.</p>
         </div>
     </div>
 
     <footer class="footer">
-        <p >&copy; 2023 Tejas Khandelwal. All rights reserved.</p>
+        <p>&copy; 2023 Tejas Khandelwal. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-1g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6g6" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Create a FormData object from the form
+            var formData = new FormData(this);
+
+            // Use fetch to submit the form data
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Use no-cors mode to prevent CORS issues
+            })
+            .then(function() {
+                // Show the thank you message
+                document.getElementById('thankYouMessage').style.display = 'block';
+                // Optionally, hide the form
+                document.querySelector('.contact-form form').style.display = 'none';
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>
