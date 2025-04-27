@@ -23,15 +23,7 @@
         .navbar-toggler-icon {
             background-color: white;
         }
-        .card {
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .card-title {
-            color: #004d00; /* Dark green */
-        }
+
         h5 {
             margin-top: 20px;
             font-weight: bold; /* Make headings bold */
@@ -95,279 +87,272 @@
             font-size: 18px;
             color: #5cb85c;
         }
+        /* Refactored Skills list using Bootstrap grid */
+        .skills-list {
+            padding-left: 0;
+            list-style: none;
+        }
+        .skills-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .skills-list li span {
+            display: inline-block;
+            width: 45%;
+        }
+        /* Certificates card group styling */
+        .card-group {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping */
+            justify-content: center; /* Center cards */
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            flex: 0 0 calc(50% - 20px); /* Two cards per row with gap */
+            max-width: calc(50% - 20px);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        @media (max-width: 600px) {
+            .card {
+                flex: 0 0 100%; /* Full width on small screens */
+                max-width: 100%;
+            }
+            .skills-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .skills-list li span {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Tejas Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current=" page" href="#about">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#certificates">Certificates</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact Us</a>
-                    </li>
-                </ul>
+   <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Tejas Portfolio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#about">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#work-experience-container">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#certificates">Certificates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+            <!-- LinkedIn Profile & Resume Download Button -->
+            <div class="d-flex align-items-center">
+                <a href="http://www.linkedin.com/in/tejas-khandelwal-093764284" target="_blank" class="btn btn-primary me-2">LinkedIn Profile </a>
+                <a href="https://drive.google.com/file/d/16742DhDaY3gPPfA8OIaFj-MTqD6nGy0v/view?usp=drive_link" download class="btn btn-primary">Download Resume</a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container mt-4" id="about">
         <div class="card mb-6" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/WhatsApp%20Image%202024-11-12%20at%2009.45.32_92ef91e4.jpg?raw=true" class="img-fluid rounded-start" alt="Tejas Khandelwal" style="max-height: 300px; object-fit: cover;">
+                    <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/tejas%20profile.jpg?raw=true" class="img-fluid rounded-start" alt="Tejas Khandelwal" style="max-height: 600px; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">TEJAS KHANDELWAL</h5>
-                        <p class="card-text"> I am a third-year B.Tech student with experience in web development
- using HTML, CSS, Wix, and WordPress. I have strong communication skills,
- a quick learning ability, and a basic understanding of Python and
- JavaScript. I'm eager to expand my technical expertise and contribute to
- team success through creativity and problem-solving, I am always eager to expand my knowledge and apply it to real-world challenges.</p>
+                        <p class="card-text"> I am a third-year B.Tech student specializing in web development with expertise in HTML, CSS, Wix, and WordPress. Known for strong communication skills and a quick learning ability, I also have a foundational knowledge of Python and JavaScript. I am passionate about expanding my technical expertise and actively seek opportunities to tackle real-world challenges. With a creative mindset and problem-solving skills, I am committed to contributing meaningfully to team success while continuously broadening my knowledge base.</p>
                         <h5>SKILLS</h5>
-                        <p class="card-text" style="font-size: 0.9em;">
-    <ul style="list-style-type: none; padding-left: 0;">
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            HTML
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 300px; margin-right: 15px;"></span>
-            CSS
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            WIX
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 313px; margin-right: 15px;"></span>
-            WORDPRESS
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            BOOTSTRAP
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 251px; margin-right: 15px;"></span>
-            BASIC PYTHON 
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            COMMUNICATION SKILLS
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 147px; margin-right: 15px;"></span>
-            PROBLEM SOLVING
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            QUICK LEARNER
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 215px; margin-right: 15px;"></span>
-            TIME MANAGEMENT
-        </li>
-        <li style="display: flex; align-items: center; margin-bottom: 10px;">
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-right: 15px;"></span>
-            TEAM MANAGEMENT
-            <span style="flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: black; margin-left: 178px; margin-right: 15px;"></span>
-            ADAPTABILITY
-        </li>
-    </ul>
-</p>
-                      
-        <!--                         <h5>CONTACT</h5>
-                        <p><a href="mailto:jhalanitejas2004@gmail.com">jhalanitejas2004@gmail.com</a></p> -->
+                        <ul class="skills-list">
+                            <li><span>HTML</span><span>CSS</span></li>
+                            <li><span>WIX</span><span>WORDPRESS</span></li>
+                            <li><span>BOOTSTRAP</span><span>BASIC PYTHON</span></li>
+                            <li><span>COMMUNICATION SKILLS</span><span>PROBLEM SOLVING</span></li>
+                            <li><span>QUICK LEARNER</span><span>TIME MANAGEMENT</span></li>
+                            <li><span>TEAM MANAGEMENT</span><span>ADAPTABILITY</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-      <center><h5 class="section-header"> WORK EXPERIENCE </h5></center>
 
-<div style="margin-bottom: 30px;">
-    <h6 style="font-size: 1.5em; font-weight: bold; text-decoration: underline;">ELAMIGO (Wordpress Developer Intern)</h6>
-    <p style="font-style: italic; margin-bottom: 20px;">MARCH 2025 - APRIL 2025</p>
-    <p>I am Tejas Khandelwal, and I completed a one-month internship at Elamigo from March 21, 2025, to April 21, 2025, in the role of WordPress Developer Intern. During this internship, I had the opportunity to work on several impactful projects that enhanced my skills in web development and design. Below are the key projects I contributed to during my internship:</p>
+<div id="work-experience-container">
+     <div class="work-experience-container" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <center>
+        <h5 class="section-header">WORK EXPERIENCE</h5>
+    </center>
+    <div style="margin-bottom: 30px;">
+        <h6 style="font-size: 1.5em; font-weight: bold; text-decoration: underline;">ELAMIGO (WordPress Developer Intern)</h6>
+        <p style="font-style: italic; margin-bottom: 20px;">MARCH 2025 - APRIL 2025</p>
+        <p>I am Tejas Khandelwal, and I completed a one-month internship at Elamigo from March 21, 2025, to April 21, 2025, in the role of WordPress Developer Intern. During this internship, I had the opportunity to work on several impactful projects that enhanced my skills in web development and design. Below are the key projects I contributed to during my internship:</p>
+    </div>
+    <div class="project" style="margin-bottom: 30px;">
+        <h6><strong><u>1. NexSchool</u></strong></h6>
+        <p>The NexSchool project aimed to create an interactive online platform for educational resources. My contributions included:</p>
+        <ul>
+            <li><strong>Website Link:</strong> <a href="https://nexschool.online/" target="_blank">Visit NexSchool</a></li>
+            <li><strong>Pages Developed:</strong>
+                <ul>
+                    <li>Contact Us: Designed a user-friendly contact form to facilitate communication between users and the school administration.</li>
+                    <li>Testimonials: Created a section to showcase feedback from students and parents, enhancing the credibility of the platform.</li>
+                    <li>Disclaimer: Developed a disclaimer page to inform users about the terms of use and limitations of the information provided.</li>
+                    <li>Header and Footer: Designed consistent header and footer sections across all pages for improved navigation and branding.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="project" style="margin-bottom: 30px;">
+        <h6><strong><u>2. Maa Nritya Yoga</u></strong></h6>
+        <p>The Maa Nritya Yoga project focused on promoting yoga and wellness through an engaging online presence. My responsibilities included:</p>
+        <ul>
+            <li><strong>Website Link:</strong> <a href="https://maanrityayoga.com" target="_blank">Visit Maa Nritya Yoga</a></li>
+            <li><strong>Pages Developed:</strong>
+                <ul>
+                    <li>Home: Created an inviting homepage that highlights the mission and services offered by the yoga studio.</li>
+                    <li>Header and Footer: Developed a cohesive header and footer for easy navigation and consistent branding.</li>
+                    <li>Contact Us: Implemented a contact form to allow potential clients to reach out for inquiries and class schedules.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="project" style="margin-bottom: 30px;">
+        <h6><strong><u>3. Shreen Gupta Makeup Artist</u></strong></h6>
+        <p>The Shreen Gupta Makeup Artist project was designed to showcase the artistry and services of a professional makeup artist. My contributions included:</p>
+        <ul>
+            <li><strong>Website Link:</strong> <a href="https://ivory-crow-622414.hostingersite.com/" target="_blank">Visit Shreen Gupta Makeup Artist</a></li>
+            <li><strong>Pages Developed:</strong>
+                <ul>
+                    <li>Contact Us: Developed a contact page to facilitate inquiries and bookings from potential clients.</li>
+                    <li>Portfolio: Created a visually appealing portfolio section to display the artist's work and attract new clients.</li>
+                    <li>Additional Changes: Made various enhancements to improve user experience and site functionality based on feedback.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <p>Throughout my internship at Elamigo, I honed my skills in WordPress development, focusing on creating responsive and user-friendly websites. This experience allowed me to deepen my understanding of project management, collaboration, and the importance of user-centered design, which I believe will be instrumental in my future endeavors in web development.</p>
+</div>
 </div>
 
-<div class="project" style="margin-bottom: 30px;">
-    <h6><strong><u>1. NexSchool</u></strong></h6>
-    <p>The NexSchool project aimed to create an interactive online platform for educational resources. My contributions included:</p>
-    <ul>
-        <li><strong>Website Link:</strong> <a href="https://nexschool.online/" target="_blank">Visit NexSchool</a></li>
-        <li><strong>Pages Developed:</strong> 
-            <ul>
-                <li>Contact Us: Designed a user-friendly contact form to facilitate communication between users and the school administration.</li>
-                <li>Testimonials: Created a section to showcase feedback from students and parents, enhancing the credibility of the platform.</li>
-                <li>Disclaimer: Developed a disclaimer page to inform users about the terms of use and limitations of the information provided.</li>
-                <li>Header and Footer: Designed consistent header and footer sections across all pages for improved navigation and branding.</li>
-            </ul>
-        </li>
-    </ul>
+<div id="projects">
+<div class="projects-container" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <center>
+        <h5 class="section-header">PROJECTS</h5>
+    </center>
+    <div style="margin-bottom: 30px;">
+        <h6><strong><u>AIKYAM</u></strong></h6>
+        <p>As part of the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, I created a prototype for the Aikyam NGO website. Aikyam is a social initiative dedicated to supporting both children and elderly individuals, providing a safe and nurturing environment for their well-being. The website serves as a platform for volunteers, donors, and the community to connect and contribute to the cause.</p>
+        <p>I took the lead in designing and developing the website using Wix, focusing on creating a user-friendly interface with features like volunteer registration, donation options, and event management. The website’s responsive design ensures accessibility across devices, and its clean layout helps visitors easily navigate and engage with the NGO's mission.</p>
+        <p>You can explore the live prototype here: <a href="https://spamminds2023.wixsite.com/aikyam" target="_blank">Visit AIKYAM Website</a></p>
+    </div>
+    <div style="margin-bottom: 30px;">
+        <h6><strong><u>READING ROOM</u></strong></h6>
+        <p>This e-book platform developed by Tejas Khandelwal is a prototype designed to offer an engaging and interactive digital reading experience. The platform allows users to easily access valuable content in a seamless, user-friendly interface. As a prototype, it demonstrates the potential for integrating data collection and form submissions, providing an efficient way to gather and manage user interactions. The project highlights a combination of design, functionality, and data management, showcasing Tejas's ability to create an accessible, scalable solution for users to engage with content in a dynamic way.</p>
+        <p>You can explore the live prototype here: <a href="https://its-tejas-khandelwal.github.io/e-book/" target="_blank">Visit READING ROOM Website</a></p>
+    </div>
+</div>
 </div>
 
-<div class="project" style="margin-bottom: 30px;">
-    <h6><strong><u>2. Maa Nritya Yoga</u></strong></h6>
-    <p>The Maa Nritya Yoga project focused on promoting yoga and wellness through an engaging online presence. My responsibilities included:</p>
-    <ul>
-        <li><strong>Website Link:</strong> <a href="https://maanrityayoga.com" target="_blank">Visit Maa Nritya Yoga</a></li>
-        <li><strong>Pages Developed:</strong> 
-            <ul>
-                <li>Home: Created an inviting homepage that highlights the mission and services offered by the yoga studio.</li>
-                <li>Header and Footer: Developed a cohesive header and footer for easy navigation and consistent branding.</li>
-                <li>Contact Us: Implemented a contact form to allow potential clients to reach out for inquiries and class schedules.</li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<div class="project" style="margin-bottom: 30px;">
-    <h6><strong><u>3. Shreen Gupta Makeup Artist</u></strong></h6>
-    <p>The Shreen Gupta Makeup Artist project was designed to showcase the artistry and services of a professional makeup artist. My contributions included:</p>
-    <ul>
-        <li><strong>Website Link:</strong> <a href="https://ivory-crow-622414.hostingersite.com/" target="_blank">Visit Shreen Gupta Makeup Artist</a></li>
-        <li><strong>Pages Developed:</strong> 
-            <ul>
-                <li>Contact Us: Developed a contact page to facilitate inquiries and bookings from potential clients.</li>
-                <li>Portfolio: Created a visually appealing portfolio section to display the artist's work and attract new clients.</li>
-                <li>Additional Changes: Made various enhancements to improve user experience and site functionality based on feedback.</li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<p>Throughout my internship at Elamigo, I honed my skills in WordPress development, focusing on creating responsive and user-friendly websites. This experience allowed me to deepen my understanding of project management, collaboration, and the importance of user-centered design, which I believe will be instrumental in my future endeavors in web development.</p>
-        <div id="projects">
-            <center><h5 class="section-header">PROJECTS</h5></center>
-            <h6><strong><u>AIKYAM</u></strong></h6>
-            <p>As part of the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, I created a prototype for the Aikyam NGO website. Aikyam is a social initiative dedicated to supporting both children and elderly individuals, providing a safe and nurturing environment for their well-being. The website serves as a platform for volunteers, donors, and the community to connect and contribute to the cause.</p>
-            <p>I took the lead in designing and developing the website using Wix, focusing on creating a user-friendly interface with features like volunteer registration, donation options, and event management. The website’s responsive design ensures accessibility across devices, and its clean layout helps visitors easily navigate and engage with the NGO's mission.</p>
-            <p>You can explore the live prototype here: <a href="https://spamminds2023.wixsite.com/aikyam" target="_blank">Visit AIKYAM Website</a></p>
-
-            <h6><strong><u>READING ROOM</u></strong></h6>
-            <p> This e-book platform developed by Tejas Khandelwal is a prototype designed to offer an engaging and interactive digital reading experience. The platform allows users to easily access valuable content in a seamless, user-friendly interface. As a prototype, it demonstrates the potential for integrating data collection and form submissions, providing an efficient way to gather and manage user interactions. The project highlights a combination of design, functionality, and data management, showcasing Tejas's ability to create an accessible, scalable solution for users to engage with content in a dynamic way.</p>
-            <p>You can explore the live prototype here: <a href="https://its-tejas-khandelwal.github.io/e-book/" target="_blank">Visit READING ROOM Website</a></p>
-        </div>
-
-      <div id="certificates" style="padding: 20px;">
+<div id="certificates">
+<div class="certificates-container" style="padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
     <center><h5 class="section-header">CERTIFICATES</h5></center>
-    <div class="card-group" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
 
-               <div class="card-group" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
-
-   <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    .card-group {
-        display: flex;
-        flex-wrap: wrap; /* Allow wrapping */
-        justify-content: space-between; /* Space between cards */
-        margin: 0; /* Remove margin to avoid blank space */
-        padding: 20px; /* Add padding around the card group */
-    }
-
-    .card {
-        flex: 0 0 calc(50% - 10px); /* Two cards per row with some gap */
-        max-width: calc(50% - 10px); /* Maximum width of each card */
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        margin-bottom: 20px; /* Space below each card */
-    }
-
-    .card img {
-        width: 100%;
-        height: auto;
-    }
-
-    @media (max-width: 600px) {
-        .card {
-            flex: 0 0 100%; /* Full width on small screens */
-            max-width: 100%; /* Maximum width of each card */
-        }
-    }
-</style>
-
-<div class="card-group">
-
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/HTML.jpg?raw=true">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">FRONT END DEVELOPMENT - HTML</h5>
-            <p class="card-text" style="font-size: 0.9em;">Earned a certification in Front-End Development (HTML) from Great Learning, demonstrating proficiency in developing structured, accessible, and responsive web pages. This certification reflects a solid understanding of modern HTML practices and front-end development principles.</p>
+    <div class="card-group" style="margin-bottom: 20px;">
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/HTML.jpg?raw=true" alt="FRONT END DEVELOPMENT - HTML">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">FRONT END DEVELOPMENT - HTML</h5>
+                <p class="card-text" style="font-size: 0.9em;">Earned a certification in Front-End Development (HTML) from Great Learning, demonstrating proficiency in developing structured, accessible, and responsive web pages. This certification reflects a solid understanding of modern HTML practices and front-end development principles.</p>
+            </div>
         </div>
-    </div>
-
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/CSS.jpg?raw=true" alt="FRONT END DEVELOPMENT - CSS">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">FRONT END DEVELOPMENT - CSS</h5>
-            <p class="card-text" style="font-size: 0.9em;">Earned a certification in Front-End Development (CSS) from Great Learning, showcasing expertise in designing responsive, visually appealing, and user-centric web interfaces. This certification highlights a strong understanding of modern CSS techniques and best practices in front-end styling.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/BUILD_A_FREE_WEBSITE_USING_WORDPRESS__Coursera_JD54EGO5NEXL_page-0001%5B1%5D.jpg?raw=true" alt="Coursera Certificate: Build a Free Website Using WordPress" class="card-img-top">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">Coursera Certificate: Build a Free Website Using WordPress</h5>
-            <p class="card-text" style="font-size: 0.9em;">I completed the "Build a Free Website Using WordPress" course on Coursera, which equipped me with the skills to create and manage a professional website using the WordPress platform.</p>
-        </div>
-    </div>
-
-
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/hackathon%20Certificate%20.jpg?raw=true" class="card-img-top" alt="Aviothic 1.0 Hackathon Certificate">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">Aviothic 1.0 Hackathon Certificate – Kanpur Institute of Technology</h5>
-            <p class="card-text" style="font-size: 0.9em;">I participated in the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, where my team secured 4th place for our innovative project.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Journey_to_Cloud__Envisioning_Your_Solution_Badge20231211-45-1z58ht_page-0001.jpg?raw=true" class="card-img-top" alt="IBM Certificate: Journey to Cloud – Envisioning Your Solution">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">IBM Certificate: Journey to Cloud – Envisioning Your Solution</h5>
-            <p class="card-text" style="font-size: 0.9em;">I earned the "Journey to Cloud: Envisioning Your Solution" certificate from IBM, which provided a comprehensive introduction to cloud computing concepts and strategies.</p>
-        </div>
-    </div>
 
         <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" class="card-img-top" alt="IBM Certificate: Getting Started with Enterprise Data Science">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">IBM Certificate: Getting Started with Enterprise Data Science</h5>
-            <p class="card-text" style="font-size: 0.9em;">I completed the "Getting Started with Enterprise Data Science" course by IBM, which provided a foundational understanding of data science principles and their application in enterprise environments.</p>
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/CSS.jpg?raw=true" alt="FRONT END DEVELOPMENT - CSS">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">FRONT END DEVELOPMENT - CSS</h5>
+                <p class="card-text" style="font-size: 0.9em;">Earned a certification in Front-End Development (CSS) from Great Learning, showcasing expertise in designing responsive, visually appealing, and user-centric web interfaces. This certification highlights a strong understanding of modern CSS techniques and best practices in front-end styling.</p>
+            </div>
         </div>
     </div>
 
+    <div class="card-group" style="margin-bottom: 20px;">
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/BUILD_A_FREE_WEBSITE_USING_WORDPRESS__Coursera_JD54EGO5NEXL_page-0001%5B1%5D.jpg?raw=true" alt="Coursera Certificate: Build a Free Website Using WordPress">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">Coursera Certificate: Build a Free Website Using WordPress</h5>
+                <p class="card-text" style="font-size: 0.9em;">I completed the "Build a Free Website Using WordPress" course on Coursera, which equipped me with the skills to create and manage a professional website using the WordPress platform.</p>
+            </div>
+        </div>
 
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/POWER%20BI%20CRASH%20COARSE_page-0001.jpg?raw=true" class="card-img-top" alt="POWER BI CRASH COURSE">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">POWER BI CRASH COURSE</h5>
-            <p class="card-text" style="font-size: 0.9em;">Successfully completed a Power BI Crash Course via an online learning platform, gaining practical knowledge in creating dynamic dashboards, interactive reports, and data-driven insights. This course strengthened my understanding of data modeling, DAX formulas, and best practices in business intelligence reporting using Microsoft Power BI.</p>
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/hackathon%20Certificate%20.jpg?raw=true" alt="Aviothic 1.0 Hackathon Certificate">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">Aviothic 1.0 Hackathon Certificate – Kanpur Institute of Technology</h5>
+                <p class="card-text" style="font-size: 0.9em;">I participated in the Aviothic 1.0 Hackathon held at Kanpur Institute of Technology, where my team secured 4th place for our innovative project.</p>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/TEJAS%20KHANDELWAL%2022%20April%202025_page-0001.jpg?raw=true" alt="The Untold Opportunity in Manufacturing, Engineering & Technology" class="card-img-top">
-        <div class="card-body" style="padding: 15px;">
-            <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">The Untold Opportunity in Manufacturing, Engineering & Technology</h5>
-            <p class="card-text" style="font-size: 0.9em;">Attended an insightful webinar on The Untold Opportunity in Manufacturing, Engineering & Technology, organized by NAMTECH. The session explored emerging trends, technological advancements, and growth prospects within the manufacturing and engineering sectors. It provided valuable industry perspectives, highlighted innovation opportunities, and emphasized the evolving role of technology in shaping the future of these fields.</p>
+    <div class="card-group" style="margin-bottom: 20px;">
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Journey_to_Cloud__Envisioning_Your_Solution_Badge20231211-45-1z58ht_page-0001.jpg?raw=true" alt="IBM Certificate: Journey to Cloud – Envisioning Your Solution">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">IBM Certificate: Journey to Cloud – Envisioning Your Solution</h5>
+                <p class="card-text" style="font-size: 0.9em;">I earned the "Journey to Cloud: Envisioning Your Solution" certificate from IBM, which provided a comprehensive introduction to cloud computing concepts and strategies.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" alt="IBM Certificate: Getting Started with Enterprise Data Science">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">IBM Certificate: Getting Started with Enterprise Data Science</h5>
+                <p class="card-text" style="font-size: 0.9em;">I completed the "Getting Started with Enterprise Data Science" course by IBM, which provided a foundational understanding of data science principles and their application in enterprise environments.</p>
+            </div>
         </div>
     </div>
 
+    <div class="card-group" style="margin-bottom: 20px;">
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/POWER%20BI%20CRASH%20COARSE_page-0001.jpg?raw=true" alt="POWER BI CRASH COURSE">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">POWER BI CRASH COURSE</h5>
+                <p class="card-text" style="font-size: 0.9em;">Successfully completed a Power BI Crash Course via an online learning platform, gaining practical knowledge in creating dynamic dashboards, interactive reports, and data-driven insights. This course strengthened my understanding of data modeling, DAX formulas, and best practices in business intelligence reporting using Microsoft Power BI.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/TEJAS%20KHANDELWAL%2022%20April%202025_page-0001.jpg?raw=true" alt="The Untold Opportunity in Manufacturing, Engineering & Technology">
+            <div class="card-body" style="padding: 15px;">
+                <h5 class="card-title" style="font-size: 1.1em; font-weight: bold;">The Untold Opportunity in Manufacturing, Engineering & Technology</h5>
+                <p class="card-text" style="font-size: 0.9em;">Attended an insightful webinar on The Untold Opportunity in Manufacturing, Engineering & Technology, organized by NAMTECH. The session explored emerging trends, technological advancements, and growth prospects within the manufacturing and engineering sectors. It provided valuable industry perspectives, highlighted innovation opportunities, and emphasized the evolving role of technology in shaping the future of these fields.</p>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
+
 
         <div id="contact">
             <center><h5 class="section-header">CONTACT US</h5></center>
