@@ -28,7 +28,8 @@
       --error:         #ff5757;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;overflow-x:hidden}
+    html,body{overflow-x:hidden}
+    html{scroll-behavior:smooth}
     body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);cursor:none;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
     /* ── NOISE OVERLAY ── */
@@ -161,7 +162,7 @@
     #hero{
       min-height:100vh;display:flex;flex-direction:column;
       justify-content:center;padding:0 6%;
-      overflow:clip; /* clip but don't scroll */
+      /* overflow handled by body overflow-x:hidden */
     }
     .h-eyebrow{
       font-size:.78rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
@@ -170,14 +171,15 @@
     }
     .h-name{
       font-family:'Syne',sans-serif;
-      font-size:clamp(2.6rem,6.8vw,7.2rem);
+      font-size:clamp(2.4rem,6.5vw,7.2rem);
       font-weight:800;line-height:.95;letter-spacing:-.03em;margin-bottom:28px;
       opacity:0;transform:translateY(36px);animation:fUp .95s .55s forwards;
-      overflow:visible;
+      /* Prevent overflow on any screen */
+      max-width:100%;
     }
-    .h-name .l1{display:block;color:var(--text);white-space:nowrap}
+    .h-name .l1{display:block;color:var(--text)}
     .h-name .l2{
-      display:block;white-space:nowrap;
+      display:block;
       background:linear-gradient(135deg,var(--amber) 0%,var(--gold) 50%,var(--copper) 100%);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
     }
@@ -536,11 +538,14 @@
 
       .h-eyebrow{font-size:.62rem;letter-spacing:.16em;line-height:1.7;white-space:normal}
       .h-name{
-        font-size:clamp(2.4rem,11vw,4rem) !important;
-        letter-spacing:-.02em;line-height:.93;
+        /* 7vw: at 390px = 27.3px; 27.3 × 11.8 chars-em = 322px < 351px content ✓ */
+        font-size:7vw !important;
+        letter-spacing:-.02em;line-height:.95;
         margin-bottom:20px;
+        max-width:100%;
       }
-      .h-name .l1,.h-name .l2{white-space:nowrap;font-size:inherit}
+      .h-name .l1{font-size:7.5vw}
+      .h-name .l2{font-size:7vw}
       .h-role{font-size:.9rem;max-width:100%}
       .h-btns{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:36px}
       .btn-p,.btn-s{width:100%;justify-content:center;padding:13px 24px}
@@ -579,11 +584,57 @@
        RESPONSIVE — SMALL PHONE (≤400px)
     ═══════════════════════════════════════════════ */
     @media(max-width:400px){
-      .h-name{font-size:clamp(2rem,10.5vw,2.8rem) !important}
-      .h-name .l1,.h-name .l2{font-size:inherit}
+      .h-name{font-size:6.8vw !important;max-width:100%}
+      .h-name .l1{font-size:7.2vw}
+      .h-name .l2{font-size:6.8vw}
       .cg{grid-template-columns:1fr}
       .h-btns{gap:10px}
     }
+
+    /* ── LIGHTBOX ── */
+    #lb{
+      position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9990;
+      display:none;align-items:center;justify-content:center;
+      padding:20px;cursor:zoom-out;
+      animation:lbIn .2s ease;
+    }
+    #lb.on{display:flex}
+    @keyframes lbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+    #lb-img{
+      max-width:min(90vw,900px);max-height:90vh;
+      object-fit:contain;border-radius:10px;
+      box-shadow:0 0 80px rgba(232,138,10,.3);
+      cursor:default;
+    }
+    #lb-close{
+      position:fixed;top:18px;right:22px;
+      width:40px;height:40px;border-radius:50%;
+      background:rgba(232,138,10,.15);border:1px solid rgba(232,138,10,.35);
+      color:var(--amber);font-size:1.3rem;font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;z-index:9991;transition:background .2s;
+      line-height:1;
+    }
+    #lb-close:hover{background:rgba(232,138,10,.3)}
+    /* Make images show pointer + subtle zoom hint */
+    .cc-img,.ic-img{
+      cursor:zoom-in;
+      transition:transform .3s,box-shadow .3s,opacity .2s;
+    }
+    .cc-img:hover,.ic-img:hover{
+      transform:scale(1.03);
+      box-shadow:0 8px 32px rgba(232,138,10,.22);
+    }
+    /* zoom icon overlay on cert cards */
+    .cc{position:relative}
+    .cc-zoom{
+      position:absolute;top:8px;right:8px;
+      background:rgba(232,138,10,.75);border-radius:50%;
+      width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+      opacity:0;transition:opacity .2s;pointer-events:none;
+    }
+    .cc:hover .cc-zoom{opacity:1}
+    .cc-zoom svg{width:14px;height:14px;fill:none;stroke:#07070F;stroke-width:2.5}
   </style>
 </head>
 <body>
@@ -760,14 +811,11 @@
 
     <!-- Internship Certificate -->
     <div class="ic-wrap">
-     <div class="ic-h">Internship Certificate</div>
-<img
-  src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/tejas%20Internship%20certificate%20%201_page-0001.jpg?raw=true"
-  alt="Elamigo Internship Certificate — Tejas Khandelwal"
-  class="ic-img"
-  loading="lazy"
-  style="display:block; margin:20px auto; max-width:100%; height:auto;"
->
+      <div class="ic-h">Internship Certificate</div>
+      <img
+        src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/tejas%20Internship%20certificate%20%201_page-0001.jpg?raw=true"
+        alt="Elamigo Internship Certificate — Tejas Khandelwal"
+        class="ic-img" loading="lazy" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)">
     </div>
   </div>
 </section>
@@ -881,36 +929,36 @@
 
   <div class="cg">
     <div class="cc rv d1">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/HTML.jpg?raw=true" alt="HTML Cert" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Front-End Development — HTML</div><div class="cc-iss">Great Learning</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/HTML.jpg?raw=true" alt="HTML Cert" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Front-End Development — HTML</div><div class="cc-iss">Great Learning</div></div>
     </div>
     <div class="cc rv d2">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/CSS.jpg?raw=true" alt="CSS Cert" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Front-End Development — CSS</div><div class="cc-iss">Great Learning</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/CSS.jpg?raw=true" alt="CSS Cert" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Front-End Development — CSS</div><div class="cc-iss">Great Learning</div></div>
     </div>
     <div class="cc rv d3">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/BUILD_A_FREE_WEBSITE_USING_WORDPRESS__Coursera_JD54EGO5NEXL_page-0001%5B1%5D.jpg?raw=true" alt="WordPress Cert" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Build a Free Website Using WordPress</div><div class="cc-iss">Coursera</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/BUILD_A_FREE_WEBSITE_USING_WORDPRESS__Coursera_JD54EGO5NEXL_page-0001%5B1%5D.jpg?raw=true" alt="WordPress Cert" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Build a Free Website Using WordPress</div><div class="cc-iss">Coursera</div></div>
     </div>
     <div class="cc rv d4">
-      <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/hackathon%20Certificate%20.jpg?raw=true" alt="Hackathon Cert" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Aviothic 1.0 Hackathon — 4th Place</div><div class="cc-iss">Kanpur Institute of Technology</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/FINAL-PORTFOLIO/blob/main/hackathon%20Certificate%20.jpg?raw=true" alt="Hackathon Cert" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Aviothic 1.0 Hackathon — 4th Place</div><div class="cc-iss">Kanpur Institute of Technology</div></div>
     </div>
     <div class="cc rv d1">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Journey_to_Cloud__Envisioning_Your_Solution_Badge20231211-45-1z58ht_page-0001.jpg?raw=true" alt="IBM Cloud" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Journey to Cloud: Envisioning Your Solution</div><div class="cc-iss">IBM</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Journey_to_Cloud__Envisioning_Your_Solution_Badge20231211-45-1z58ht_page-0001.jpg?raw=true" alt="IBM Cloud" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Journey to Cloud: Envisioning Your Solution</div><div class="cc-iss">IBM</div></div>
     </div>
     <div class="cc rv d2">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" alt="IBM DS" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Getting Started with Enterprise Data Science</div><div class="cc-iss">IBM</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/Getting_Started_with_Enterprise_Data_Science_Badge20231211-29-vpql8h_page-0001.jpg?raw=true" alt="IBM DS" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Getting Started with Enterprise Data Science</div><div class="cc-iss">IBM</div></div>
     </div>
     <div class="cc rv d3">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/POWER%20BI%20CRASH%20COARSE_page-0001.jpg?raw=true" alt="Power BI" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Power BI Crash Course</div><div class="cc-iss">Online Platform</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/POWER%20BI%20CRASH%20COARSE_page-0001.jpg?raw=true" alt="Power BI" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Power BI Crash Course</div><div class="cc-iss">Online Platform</div></div>
     </div>
     <div class="cc rv d4">
-      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/infosys%20training%20certificate%20.jpg?raw=true" alt="Infosys" class="cc-img" loading="lazy">
-      <div class="cc-info"><div class="cc-name">Employability Enhancement Programme</div><div class="cc-iss">Infosys Foundation</div></div>
+      <img src="https://github.com/its-tejas-khandelwal/PORTFOLIO/blob/main/infosys%20training%20certificate%20.jpg?raw=true" alt="Infosys" class="cc-img" style="cursor:zoom-in" onclick="openLB(this.src,this.alt)" loading="lazy">
+      <div class="cc-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="cc-info"><div class="cc-name">Employability Enhancement Programme</div><div class="cc-iss">Infosys Foundation</div></div>
     </div>
   </div>
 </section>
@@ -1001,14 +1049,11 @@
 </main>
 
 <footer>
-  <div class="f-c">
-    © 2026 <a href="#hero">Tejas Khandelwal</a> &nbsp;·&nbsp;
-    
-  </div>
+  <div class="f-c">© 2026 <a href="#hero">Tejas Khandelwal</a>. All rights reserved.</div>
   <div class="f-links">
-    
+    <a href="http://www.linkedin.com/in/tejas-khandelwal-093764284" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://github.com/its-tejas-khandelwal" target="_blank" rel="noopener">GitHub</a>
-    <a href="mailto:jhalanitejas2004@gmail.com">Email Me</a>
+    <a href="mailto:jhalanitejas2004@gmail.com">Email</a>
   </div>
 </footer>
 
@@ -1305,5 +1350,11 @@ document.getElementById('cForm').addEventListener('submit', function(e) {
 });
 </script>
 
+
+<!-- ── LIGHTBOX ── -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="Certificate preview">
+  <button id="lb-close" aria-label="Close">&times;</button>
+  <img id="lb-img" src="" alt="Certificate">
+</div>
 </body>
 </html>
