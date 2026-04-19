@@ -132,7 +132,7 @@
 
     /* ── MAIN WRAPPER ── */
     main{position:relative;z-index:1}
-    section{padding:140px 6%;position:relative}
+    section{padding:clamp(72px,10vw,140px) 6%;position:relative}
 
     /* ── SECTION TYPOGRAPHY ── */
     .stag{
@@ -161,6 +161,7 @@
     #hero{
       min-height:100vh;display:flex;flex-direction:column;
       justify-content:center;padding:0 6%;
+      overflow:clip; /* clip but don't scroll */
     }
     .h-eyebrow{
       font-size:.78rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
@@ -168,13 +169,15 @@
       opacity:0;transform:translateY(20px);animation:fUp .8s .4s forwards;
     }
     .h-name{
-      font-family:'Syne',sans-serif;font-size:clamp(3.4rem,10.5vw,9rem);
-      font-weight:800;line-height:.92;letter-spacing:-.03em;margin-bottom:28px;
+      font-family:'Syne',sans-serif;
+      font-size:clamp(2.6rem,6.8vw,7.2rem);
+      font-weight:800;line-height:.95;letter-spacing:-.03em;margin-bottom:28px;
       opacity:0;transform:translateY(36px);animation:fUp .95s .55s forwards;
+      overflow:visible;
     }
-    .h-name .l1{display:block;color:var(--text)}
+    .h-name .l1{display:block;color:var(--text);white-space:nowrap}
     .h-name .l2{
-      display:block;
+      display:block;white-space:nowrap;
       background:linear-gradient(135deg,var(--amber) 0%,var(--gold) 50%,var(--copper) 100%);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
     }
@@ -242,7 +245,9 @@
     ───────────────────────────────────────────── */
     #about{
       display:grid;grid-template-columns:1fr 1.1fr;gap:90px;
-      align-items:center;padding-top:140px;padding-bottom:140px;
+      align-items:center;
+      padding-top:clamp(72px,10vw,140px);
+      padding-bottom:clamp(72px,10vw,140px);
     }
     .ab-img-w{position:relative;max-width:400px}
     .ab-img{
@@ -272,7 +277,7 @@
     /* ─────────────────────────────────────────────
        EXPERIENCE
     ───────────────────────────────────────────── */
-    #experience{padding-top:120px;padding-bottom:120px}
+    #experience{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(60px,9vw,120px)}
     .exp-card{
       max-width:820px;background:var(--glass);border:1px solid var(--gborder);
       border-radius:14px;padding:40px;backdrop-filter:blur(10px);
@@ -303,7 +308,7 @@
     /* ─────────────────────────────────────────────
        PROJECTS
     ───────────────────────────────────────────── */
-    #projects{padding-top:120px;padding-bottom:120px}
+    #projects{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(60px,9vw,120px)}
     .pg{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
     .pc{
@@ -337,6 +342,8 @@
     }
     .p-tag{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
     .p-name{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.2}
+    a.p-name{text-decoration:none;transition:color .25s}
+    a.p-name:hover{color:var(--amber)}
     .p-desc{font-size:.91rem;color:var(--sub);line-height:1.72;margin-bottom:22px}
     .p-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
     .s-tag{
@@ -344,19 +351,28 @@
       background:rgba(192,112,37,.1);border:1px solid rgba(192,112,37,.22);
       padding:4px 10px;border-radius:4px;
     }
-    .p-links{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
-    .p-link{
-      display:inline-flex;align-items:center;gap:6px;font-size:.83rem;
-      font-weight:700;color:var(--amber);text-decoration:none;
-      letter-spacing:.05em;transition:gap .25s,color .2s;
+    .p-links{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px}
+    /* ── Visit Site button ── */
+    .btn-visit{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:10px 20px;border-radius:6px;
+      background:linear-gradient(135deg,var(--amber),var(--copper));
+      color:#07070F;font-size:.82rem;font-weight:700;
+      text-decoration:none;letter-spacing:.06em;
+      transition:transform .25s,box-shadow .25s;
+      box-shadow:0 0 18px rgba(232,138,10,.22);
     }
-    .p-link:hover{gap:10px;color:var(--gold)}
-    .p-link-main{
-      background:rgba(232,138,10,.12);border:1px solid rgba(232,138,10,.3);
-      padding:9px 18px;border-radius:6px;color:var(--amber);
-      transition:background .25s,border-color .25s,gap .25s !important;
+    .btn-visit:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(232,138,10,.42)}
+    /* ── GitHub ghost button ── */
+    .btn-ghost{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:10px 18px;border-radius:6px;
+      background:transparent;border:1px solid var(--gborder);
+      color:var(--sub);font-size:.82rem;font-weight:600;
+      text-decoration:none;letter-spacing:.04em;
+      transition:border-color .25s,color .25s,transform .25s;
     }
-    .p-link-main:hover{background:rgba(232,138,10,.22);border-color:var(--amber);gap:10px !important;}
+    .btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
 
     /* Visual panel for featured project */
     .p-vis{
@@ -390,7 +406,7 @@
     /* ─────────────────────────────────────────────
        CERTIFICATES
     ───────────────────────────────────────────── */
-    #certificates{padding-top:120px;padding-bottom:120px}
+    #certificates{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(60px,9vw,120px)}
     .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
     .cc{
       background:var(--glass);border:1px solid var(--gborder);
@@ -406,7 +422,7 @@
     /* ─────────────────────────────────────────────
        CONTACT
     ───────────────────────────────────────────── */
-    #contact{padding-top:120px;padding-bottom:80px}
+    #contact{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(40px,6vw,80px)}
     .ct-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:1000px}
     .ct-h{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.25}
     .ct-d{font-size:.94rem;color:var(--sub);line-height:1.75;margin-bottom:44px}
@@ -465,67 +481,134 @@
       display:flex;justify-content:space-between;align-items:center;
       position:relative;z-index:1;flex-wrap:wrap;gap:16px;
     }
-    .f-c{color:var(--muted);font-size:.83rem}
-    .f-c a{color:var(--amber);text-decoration:none}
-    .f-links{display:flex;gap:20px}
-    .f-links a{color:var(--sub);text-decoration:none;font-size:.83rem;transition:color .2s}
+    .f-c{color:var(--muted);font-size:.78rem;line-height:1.7}
+    .f-c a{color:var(--amber);text-decoration:none;transition:color .2s}
+    .f-c a:hover{color:var(--gold)}
+    .f-links{display:flex;gap:18px;flex-wrap:wrap}
+    .f-links a{color:var(--sub);text-decoration:none;font-size:.78rem;transition:color .2s}
     .f-links a:hover{color:var(--amber)}
 
-    /* ── NAV OVERLAY — lighter, no blur ── */
+    /* ── NAV OVERLAY ── */
     #nav-overlay{
       display:none;position:fixed;inset:0;
-      background:rgba(0,0,0,.28);
-      z-index:199;
+      background:rgba(0,0,0,.28);z-index:199;
     }
     #nav-overlay.on{display:block}
 
-    /* ─────────────────────────────────────────────
-       MOBILE
-    ───────────────────────────────────────────── */
-    @media(max-width:1000px){
-      #about{grid-template-columns:1fr;gap:48px}
-      .ab-img-w{max-width:300px;margin:0 auto}
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — LAPTOP (≤1280px)
+    ═══════════════════════════════════════════════ */
+    @media(max-width:1280px){
+      .pc.feat{grid-template-columns:1fr 0.85fr;gap:32px}
+      #about{gap:60px}
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — TABLET LANDSCAPE (≤1024px)
+    ═══════════════════════════════════════════════ */
+    @media(max-width:1024px){
+      nav{padding:20px 5%}
+      nav.scrolled{padding:14px 5%}
+      section{padding:100px 5%}
+      #hero{padding:0 5%}
+      #about{
+        grid-template-columns:1fr;gap:40px;
+        padding-top:100px;padding-bottom:100px;
+      }
+      .ab-img-w{max-width:280px;margin:0 auto}
       .pg{grid-template-columns:1fr}
       .pc.feat{grid-column:auto;grid-template-columns:1fr}
       .p-vis{display:none}
-      .ct-grid{grid-template-columns:1fr}
+      .ct-grid{grid-template-columns:1fr;gap:48px}
+      .stitle{margin-bottom:44px}
     }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — TABLET PORTRAIT (≤768px)
+    ═══════════════════════════════════════════════ */
     @media(max-width:768px){
       .ham{display:flex}
       .nav-links{
         position:fixed;top:0;right:-100%;height:100vh;width:260px;
-        background:rgba(10,9,18,.97);
+        background:rgba(10,9,18,.98);
         border-left:1px solid var(--gborder);flex-direction:column;
-        justify-content:center;align-items:center;gap:38px;
+        justify-content:center;align-items:center;gap:36px;
         transition:right .4s cubic-bezier(.4,0,.2,1);z-index:200;
+        list-style:none;
       }
       .nav-links.open{right:0}
-      .nav-links a{font-size:1.05rem}
+      .nav-links a{font-size:1rem;letter-spacing:.08em}
+      section{padding:90px 5%}
+      #hero{padding:100px 5% 0}
+      .h-eyebrow{font-size:.7rem;letter-spacing:.22em}
+      .h-role{font-size:.95rem}
+      .exp-card{padding:28px}
+      .pc{padding:28px}
+      .cg{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .ct-soc{flex-wrap:wrap;gap:10px}
     }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤600px)
+    ═══════════════════════════════════════════════ */
     @media(max-width:600px){
-      .h-btns{flex-direction:column;align-items:flex-start}
-      .h-name{
-        font-size:clamp(2rem,7.8vw,3rem) !important;
-        letter-spacing:-.01em;
-        line-height:.96;
-      }
-      .h-name .l2{
-        word-break:normal !important;
-        white-space:nowrap;
-        font-size:clamp(1.7rem,7.2vw,3rem);
-      }
-      section{padding:80px 5%}
-      #about,.ct-grid{padding-top:80px;padding-bottom:80px}
-      .cg{grid-template-columns:1fr 1fr}
-      footer{flex-direction:column;text-align:center}
-      .f-links{justify-content:center}
       body{cursor:auto}
       #c-dot,#c-ring,#c-glow{display:none}
-      .h-eyebrow{font-size:.64rem;letter-spacing:.14em;line-height:1.6}
+
+      section{padding:72px 5%}
+      #hero{padding:90px 5% 0;min-height:100svh}
+      #about{padding-top:72px;padding-bottom:72px}
+      #contact{padding-top:72px;padding-bottom:60px}
+
+      .h-eyebrow{font-size:.62rem;letter-spacing:.16em;line-height:1.7;white-space:normal}
+      .h-name{
+        font-size:clamp(2.4rem,11vw,4rem) !important;
+        letter-spacing:-.02em;line-height:.93;
+        margin-bottom:20px;
+      }
+      .h-name .l1,.h-name .l2{white-space:nowrap;font-size:inherit}
+      .h-role{font-size:.9rem;max-width:100%}
+      .h-btns{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:36px}
+      .btn-p,.btn-s{width:100%;justify-content:center;padding:13px 24px}
+      .h-soc{gap:14px;flex-wrap:wrap}
+      .h-soc-a{font-size:.78rem}
+
+      .stitle{font-size:clamp(1.8rem,8vw,2.6rem);margin-bottom:32px}
+      .stag{font-size:.66rem;letter-spacing:.2em}
+
+      .exp-card{padding:22px;border-radius:12px}
+      .ep-item{padding-left:12px}
+      .ic-img{max-width:100%}
+
+      .pc{padding:22px;border-radius:12px}
+      .p-name{font-size:1.2rem}
+      .p-stack{gap:6px}
+      .s-tag{font-size:.68rem;padding:3px 8px}
+      .p-badge{font-size:.66rem}
+
+      .cg{grid-template-columns:1fr 1fr;gap:14px}
+      .cc-info{padding:14px 16px}
+      .cc-name{font-size:.82rem}
+
+      .ct-grid{gap:36px}
+      .ct-h{font-size:1.5rem}
+      .ct-soc{flex-direction:column;align-items:flex-start;gap:10px}
+      .soc-btn{width:100%;justify-content:center}
+      .cf{gap:16px}
+
+      footer{flex-direction:column;text-align:center;gap:12px;padding:24px 5%}
+      .f-links{justify-content:center;flex-wrap:wrap;gap:12px}
+      .f-c{font-size:.74rem}
     }
-    @media(max-width:380px){
-      .h-name .l2{font-size:6.8vw}
-      .h-name .l1{font-size:7.5vw}
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — SMALL PHONE (≤400px)
+    ═══════════════════════════════════════════════ */
+    @media(max-width:400px){
+      .h-name{font-size:clamp(2rem,10.5vw,2.8rem) !important}
+      .h-name .l1,.h-name .l2{font-size:inherit}
+      .cg{grid-template-columns:1fr}
+      .h-btns{gap:10px}
     }
   </style>
 </head>
@@ -729,7 +812,7 @@
         <div class="p-num">01</div>
         <span class="p-badge">Team Lead · Frontend &amp; Deployment</span>
         <p class="p-tag">Full-Stack · Live Production · Smart City</p>
-        <h3 class="p-name">SpotEasy India</h3>
+        <a href="https://www.spoteasy.in" target="_blank" rel="noopener" class="p-name" style="display:block;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:12px;line-height:1.2;text-decoration:none;color:var(--text);transition:color .25s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--text)'">SpotEasy India ↗</a>
         <p class="p-desc">
           A production-ready smart parking management system live at <strong>www.spoteasy.in</strong>. Features role-based dashboards (Super Admin, Vendor, Customer), real-time slot polling, UPI payment integration, a glassmorphism digital parking pass with QR code, Leaflet.js live maps, PWA support, and Selenium 4 automated testing on BrowserStack.
         </p>
@@ -746,11 +829,14 @@
           <span class="s-tag">BrowserStack</span>
         </div>
         <div class="p-links">
-          <a href="https://www.spoteasy.in" target="_blank" rel="noopener" class="p-link p-link-main">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            Visit Live Site →
+          <a href="https://www.spoteasy.in" target="_blank" rel="noopener" class="btn-visit">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Visit Site
           </a>
-          <a href="https://github.com/its-tejas-khandelwal" target="_blank" rel="noopener" class="p-link">GitHub →</a>
+          <a href="https://github.com/its-tejas-khandelwal" target="_blank" rel="noopener" class="btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
         </div>
       </div>
       <div class="p-vis">
@@ -765,7 +851,7 @@
     <div class="pc rv d3">
       <div class="p-num">02</div>
       <p class="p-tag">Frontend · E-Book Platform</p>
-      <h3 class="p-name">Reading Room</h3>
+      <a href="https://its-tejas-khandelwal.github.io/e-book/" target="_blank" rel="noopener" class="p-name" style="display:block;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:12px;line-height:1.2;text-decoration:none;color:var(--text);transition:color .25s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--text)'">Reading Room ↗</a>
       <p class="p-desc">
         An interactive digital e-book platform with <strong>10 real books integrated for trial reading</strong>, served from a Google Drive backend as PDF files. Users can browse, read, and navigate chapters through a seamless, device-friendly interface. Built for accessibility and scalability.
       </p>
@@ -776,8 +862,14 @@
         <span class="s-tag">PDF.js</span>
       </div>
       <div class="p-links">
-        <a href="https://its-tejas-khandelwal.github.io/e-book/" target="_blank" rel="noopener" class="p-link">Live Demo →</a>
-        <a href="https://github.com/its-tejas-khandelwal/e-book" target="_blank" rel="noopener" class="p-link">GitHub →</a>
+        <a href="https://its-tejas-khandelwal.github.io/e-book/" target="_blank" rel="noopener" class="btn-visit">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Visit Site
+        </a>
+        <a href="https://github.com/its-tejas-khandelwal/e-book" target="_blank" rel="noopener" class="btn-ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
       </div>
     </div>
 
@@ -785,7 +877,7 @@
     <div class="pc rv d4">
       <div class="p-num">03</div>
       <p class="p-tag">NGO Website · Hackathon 4th Place</p>
-      <h3 class="p-name">AIKYAM</h3>
+      <a href="https://spamminds2023.wixsite.com/aikyam" target="_blank" rel="noopener" class="p-name" style="display:block;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:12px;line-height:1.2;text-decoration:none;color:var(--text);transition:color .25s;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--text)'">AIKYAM ↗</a>
       <p class="p-desc">
         NGO website prototype for <em>Aikyam</em> — a social initiative supporting children and the elderly — built for the Aviothic 1.0 Hackathon at KIT Kanpur. <strong>Secured 4th place.</strong> Features volunteer registration, donation options, event management, and fully responsive Wix design.
       </p>
@@ -795,7 +887,10 @@
         <span class="s-tag">UX / UI</span>
       </div>
       <div class="p-links">
-        <a href="https://spamminds2023.wixsite.com/aikyam" target="_blank" rel="noopener" class="p-link">Visit Site →</a>
+        <a href="https://spamminds2023.wixsite.com/aikyam" target="_blank" rel="noopener" class="btn-visit">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Visit Site
+        </a>
       </div>
     </div>
 
@@ -926,9 +1021,12 @@
 </main>
 
 <footer>
-  <div class="f-c">© 2026 <a href="#hero">Tejas Khandelwal</a>.</div>
+  <div class="f-c">
+    © 2026 <a href="#hero">Tejas Khandelwal</a> &nbsp;·&nbsp;
+    <a href="https://its-tejas-khandelwal.github.io/PORTFOLIO/" target="_blank" rel="noopener">its-tejas-khandelwal.github.io/PORTFOLIO</a>
+  </div>
   <div class="f-links">
-    <a href="http://www.linkedin.com/in/tejas-khandelwal-093764284" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="http://www.linkedin.com/in/tejas-khandelwal-093764284" target="_blank" rel="noopener">in/tejas-khandelwal-093764284</a>
     <a href="https://github.com/its-tejas-khandelwal" target="_blank" rel="noopener">GitHub</a>
     <a href="mailto:jhalanitejas2004@gmail.com">Email Me</a>
   </div>
