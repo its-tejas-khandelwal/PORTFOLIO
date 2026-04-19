@@ -953,37 +953,42 @@
       </div>
     </div>
 
-    <!-- Form col -->
-    <!--
-      ⚡ FORM SETUP — Read this!
-      Option A (Recommended — Free):
-        1. Go to https://formspree.io and create a free account
-        2. Click "New Form" → get your Form ID (looks like "xabc1234")
-        3. Replace "YOUR_FORM_ID" below with your real ID
-      Option B (Zero setup):
-        Leave as-is — the form will open your email client automatically as a fallback
-    -->
+    <!-- Form col — powered by Google Forms (responses to your Google Sheet + email) -->
     <div class="rv d3">
-      <form class="cf" id="cForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <!-- Hidden iframe — catches the Google Forms redirect silently so page never reloads -->
+      <iframe name="gf-sink" style="display:none" aria-hidden="true"></iframe>
+
+      <form class="cf" id="cForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSe-CAzUqj1UWB4cUeiatkJueTi10xTSJAGXxRv09f5O8n01Gg/formResponse"
+            method="POST"
+            target="gf-sink">
+
+        <!-- Google Form entry field names mapped to your form fields -->
+        <input type="hidden" name="entry.1299876013" id="gf-name">
+        <input type="hidden" name="entry.822572349"  id="gf-email">
+        <input type="hidden" name="entry.860908998"  id="gf-message">
+
         <div id="fMsg" class="fm"></div>
+
         <div class="fg">
           <label class="fl" for="fname">Your Name</label>
-          <input class="fi" type="text" id="fname" name="name" placeholder="Rahul Sharma" required>
+          <input class="fi" type="text" id="fname" placeholder="Rahul Sharma" required autocomplete="name">
         </div>
         <div class="fg">
           <label class="fl" for="femail">Email Address</label>
-          <input class="fi" type="email" id="femail" name="email" placeholder="rahul@company.com" required>
+          <input class="fi" type="email" id="femail" placeholder="rahul@company.com" required autocomplete="email">
         </div>
         <div class="fg">
           <label class="fl" for="fsubj">Subject</label>
-          <input class="fi" type="text" id="fsubj" name="subject" placeholder="Job Opportunity / Freelance Inquiry">
+          <input class="fi" type="text" id="fsubj" placeholder="Job Opportunity / Freelance Inquiry">
         </div>
         <div class="fg">
           <label class="fl" for="fmsg">Message</label>
-          <textarea class="ft" id="fmsg" name="message" placeholder="Hi Tejas, I came across your portfolio and would like to discuss..." required></textarea>
+          <textarea class="ft" id="fmsg" placeholder="Hi Tejas, I came across your portfolio and would like to discuss..." required></textarea>
         </div>
+
         <button type="submit" class="f-sub" id="fBtn">
-          <span>Send Message</span>
+          <span id="fBtnTxt">Send Message</span>
           <span class="ic-snd"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
         </button>
         <p class="f-note">Or email directly: <a href="mailto:jhalanitejas2004@gmail.com">jhalanitejas2004@gmail.com</a></p>
@@ -1249,39 +1254,53 @@ document.querySelectorAll('.pc,.exp-card').forEach(card => {
 });
 
 /* ────────────────────────────
-   CONTACT FORM
+   CONTACT FORM — Web3Forms
+   Free delivery to Gmail.
+   Google Forms integration — no setup needed, works immediately
 ──────────────────────────── */
-document.getElementById('cForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('fBtn');
-  const msg = document.getElementById('fMsg');
-  btn.disabled = true;
-  btn.querySelector('span').textContent = 'Sending…';
+document.getElementById('cForm').addEventListener('submit', function(e) {
+  const btn    = document.getElementById('fBtn');
+  const btnTxt = document.getElementById('fBtnTxt');
+  const msg    = document.getElementById('fMsg');
 
-  const action = this.getAttribute('action');
-  if (action.includes('YOUR_FORM_ID')) {
-    // Fallback: open mailto
-    const fd  = new FormData(this);
-    const sub = fd.get('subject') || 'Portfolio Contact';
-    const bod = `Name: ${fd.get('name')}\nEmail: ${fd.get('email')}\n\n${fd.get('message')}`;
-    window.location.href = `mailto:jhalanitejas2004@gmail.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(bod)}`;
-    msg.className='fm ok'; msg.style.display='block';
-    msg.textContent='Email client opened — please send from there!';
-  } else {
-    try {
-      const res = await fetch(action, { method:'POST', body: new FormData(this), headers:{Accept:'application/json'} });
-      if (res.ok) {
-        msg.className='fm ok'; msg.style.display='block';
-        msg.textContent='✓ Message sent! I\'ll reply within 24 hours.';
-        this.reset();
-      } else throw new Error();
-    } catch {
-      msg.className='fm err'; msg.style.display='block';
-      msg.textContent='✕ Oops — something went wrong. Email me directly instead.';
-    }
+  // Collect visible field values
+  const name    = document.getElementById('fname').value.trim();
+  const email   = document.getElementById('femail').value.trim();
+  const subject = document.getElementById('fsubj').value.trim();
+  const message = document.getElementById('fmsg').value.trim();
+
+  // Basic validation
+  if (!name || !email || !message) {
+    e.preventDefault();
+    msg.className = 'fm err'; msg.style.display = 'block';
+    msg.textContent = 'Please fill in Name, Email and Message.';
+    return;
   }
-  btn.disabled = false;
-  btn.querySelector('span').textContent = 'Send Message';
+
+  // Map visible fields → hidden Google Form entry fields
+  document.getElementById('gf-name').value  = name;
+  document.getElementById('gf-email').value = email;
+  // Combine subject + message into the single message entry
+  document.getElementById('gf-message').value = subject
+    ? 'Subject: ' + subject + '\n\n' + message
+    : message;
+
+  // Show sending state — form submits normally to hidden iframe
+  btn.disabled = true;
+  btnTxt.textContent = 'Sending…';
+  msg.style.display = 'none';
+
+  // After 1.8s (iframe load time), show success and reset
+  setTimeout(function() {
+    msg.className = 'fm ok'; msg.style.display = 'block';
+    msg.textContent = '✓ Message sent! I\'ll reply within 24 hours.';
+    document.getElementById('fname').value  = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fsubj').value  = '';
+    document.getElementById('fmsg').value   = '';
+    btn.disabled = false;
+    btnTxt.textContent = 'Send Message';
+  }, 1800);
 });
 </script>
 
