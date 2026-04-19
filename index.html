@@ -279,7 +279,7 @@
     ───────────────────────────────────────────── */
     #experience{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(60px,9vw,120px)}
     .exp-card{
-      max-width:820px;background:var(--glass);border:1px solid var(--gborder);
+      max-width:820px;margin:0 auto;background:var(--glass);border:1px solid var(--gborder);
       border-radius:14px;padding:40px;backdrop-filter:blur(10px);
     }
     .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px}
@@ -325,8 +325,7 @@
     .pc:hover{transform:translateY(-8px);border-color:rgba(232,138,10,.26);box-shadow:0 24px 60px rgba(232,138,10,.1)}
 
     .pc.feat{
-      grid-column:1/-1;display:grid;grid-template-columns:1.15fr 1fr;
-      gap:44px;align-items:center;
+      grid-column:1/-1;display:block;
     }
 
     .p-num{
@@ -374,33 +373,8 @@
     }
     .btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
 
-    /* Visual panel for featured project */
-    .p-vis{
-      border-radius:10px;height:300px;display:flex;align-items:center;
-      justify-content:center;position:relative;overflow:hidden;
-      background:linear-gradient(135deg,rgba(232,138,10,.055),rgba(244,196,48,.025));
-      border:1px solid var(--gborder);
-    }
-    .p-vis-dots{
-      position:absolute;inset:0;
-      background-image:radial-gradient(circle,rgba(232,138,10,.18) 1px,transparent 1px);
-      background-size:22px 22px;
-    }
-    .p-vis-txt{
-      font-family:'Syne',sans-serif;font-size:5.5rem;font-weight:800;
-      color:rgba(232,138,10,.12);z-index:1;letter-spacing:-.04em;
-    }
-    /* animated ring inside visual */
-    .p-vis-ring{
-      position:absolute;width:160px;height:160px;border-radius:50%;
-      border:1px solid rgba(232,138,10,.12);z-index:0;
-      animation:spin 20s linear infinite;
-    }
-    .p-vis-ring2{
-      position:absolute;width:100px;height:100px;border-radius:50%;
-      border:1px dashed rgba(244,196,48,.1);
-      animation:spin 14s linear infinite reverse;
-    }
+    /* Visual panel for featured project — hidden on all sizes */
+    .p-vis{display:none}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
     /* ─────────────────────────────────────────────
@@ -423,7 +397,7 @@
        CONTACT
     ───────────────────────────────────────────── */
     #contact{padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(40px,6vw,80px)}
-    .ct-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:1000px}
+    .ct-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;max-width:1000px;margin:0 auto}
     .ct-h{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.25}
     .ct-d{font-size:.94rem;color:var(--sub);line-height:1.75;margin-bottom:44px}
     .ct-item{display:flex;align-items:center;gap:18px;margin-bottom:24px}
